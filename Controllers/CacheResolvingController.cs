@@ -10,9 +10,9 @@ namespace pathways_common.Controllers
         private readonly IMemoryCache memoryCache;
         private readonly IResolveService<T> userService;
 
-        protected CacheResolvingController(IResolveService<T> userService, IMemoryCache memoryCache)
+        protected CacheResolvingController(IResolveService<T> cacheService, IMemoryCache memoryCache)
         {
-            this.userService = userService;
+            this.userService = cacheService;
             this.memoryCache = memoryCache;
         }
 
