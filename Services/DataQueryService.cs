@@ -4,9 +4,10 @@ namespace pathways_common.Services
     using System.Linq;
     using Interfaces.Entities;
     using Interfaces.Services;
+    using Microsoft.EntityFrameworkCore;
 
     public abstract class DataQueryService<T, T2> : IGetDataService<T>
-        where T : IIdEntity
+        where T : class, IIdEntity where T2 : DbContext
     {
         protected readonly IEnumerable<T> collection;
         protected readonly T2 context;
@@ -19,12 +20,12 @@ namespace pathways_common.Services
 
         public T Retrieve(int id)
         {
-            return this.collection.FirstOrDefault(c => c.Id == id);
+            return this.context.Query<T>().FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return this.collection;
+            return this.context.Set<T>();
         }
     }
 }
