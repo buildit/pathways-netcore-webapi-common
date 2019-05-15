@@ -1,4 +1,4 @@
-namespace pathways_common.Interfaces
+namespace pathways_common.Interfaces.Entities
 {
     public interface INamedEntity : IIdEntity
     {

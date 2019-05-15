@@ -1,7 +1,8 @@
 namespace pathways_common.Controllers
 {
     using System;
-    using Interfaces;
+    using Interfaces.Entities;
+    using Interfaces.Services;
     using Microsoft.Extensions.Caching.Memory;
 
     public abstract class CacheResolvingController<T> : ApiController

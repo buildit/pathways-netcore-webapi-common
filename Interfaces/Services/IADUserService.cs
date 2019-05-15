@@ -1,4 +1,4 @@
-namespace pathways_common.Interfaces
+namespace pathways_common.Interfaces.Services
 {
     public interface IADUserService<T> : ICrudService<T>, IGetByNameService<T>
     {

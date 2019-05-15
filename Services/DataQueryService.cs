@@ -2,7 +2,8 @@ namespace pathways_common.Services
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Interfaces;
+    using Interfaces.Entities;
+    using Interfaces.Services;
 
     public abstract class DataQueryService<T, T2> : IGetDataService<T>
         where T : IIdEntity

@@ -1,7 +1,7 @@
 namespace pathways_common.Controllers
 {
     using System.Collections.Generic;
-    using Interfaces;
+    using Interfaces.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-namespace pathways_common.Interfaces
+namespace pathways_common.Interfaces.Services
 {
     using System.Collections.Generic;
 
