@@ -2,11 +2,11 @@ namespace pathways_common.Interfaces
 {
     public interface ICrudService<T> : IGetDataService<T>
     {
-        T Create(T user);
+        T Create(T entity);
 
-        void Update(int userId, T user);
+        void Update(T entity);
 
-        void Delete(int userId, int id);
+        void Delete(int id);
 
         T GetByIdWithIncludes(int id);
     }
