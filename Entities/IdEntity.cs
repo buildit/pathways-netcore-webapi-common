@@ -1,6 +1,6 @@
 namespace pathways_common.Entities
 {
-    using Interfaces;
+    using Interfaces.Entities;
 
     public abstract class IdEntity : IIdEntity
     {

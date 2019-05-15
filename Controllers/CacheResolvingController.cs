@@ -1,19 +1,20 @@
 namespace pathways_common.Controllers
 {
     using System;
-    using Interfaces;
+    using Interfaces.Entities;
+    using Interfaces.Services;
     using Microsoft.Extensions.Caching.Memory;
 
     public abstract class CacheResolvingController<T> : ApiController
         where T : INamedEntity
     {
         private readonly IMemoryCache memoryCache;
-        private readonly IResolveService<T> userService;
+        private readonly IGetByNameService<T> cachedService;
 
-        protected CacheResolvingController(IResolveService<T> userService, IMemoryCache memoryCache)
+        protected CacheResolvingController(IGetByNameService<T> cachedService, IMemoryCache memoryCache)
         {
-            this.userService = userService;
             this.memoryCache = memoryCache;
+            this.cachedService = cachedService;
         }
 
         protected int GetUserId(string identityName)
@@ -21,7 +22,7 @@ namespace pathways_common.Controllers
             return this.memoryCache.GetOrCreate(identityName, e =>
             {
                 e.SlidingExpiration = TimeSpan.FromHours(4);
-                return this.userService.Retrieve(identityName).Id;
+                return this.cachedService.Retrieve(identityName).Id;
             });
         }
     }
