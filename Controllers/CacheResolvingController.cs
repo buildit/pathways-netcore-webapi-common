@@ -8,9 +8,9 @@ namespace pathways_common.Controllers
         where T : INamedEntity
     {
         private readonly IMemoryCache memoryCache;
-        private readonly IResolveService<T> userService;
+        private readonly IGetByNameService<T> userService;
 
-        protected CacheResolvingController(IResolveService<T> cacheService, IMemoryCache memoryCache)
+        protected CacheResolvingController(IGetByNameService<T> cacheService, IMemoryCache memoryCache)
         {
             this.userService = cacheService;
             this.memoryCache = memoryCache;
