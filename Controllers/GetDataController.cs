@@ -21,7 +21,7 @@ namespace pathways_common.Controllers
             IEnumerable<T> locations = this.service.GetAll();
             return this.Ok(locations);
         }
-        
+
         [HttpGet("{id}")]
         [AllowAnonymous]
         public IActionResult GetById(int id)

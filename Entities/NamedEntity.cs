@@ -8,7 +8,7 @@ namespace pathways_common.Entities
         {
         }
 
-        protected NamedEntity(int id, string name) 
+        protected NamedEntity(int id, string name)
             : base(id)
         {
             this.Name = name;
