@@ -22,7 +22,10 @@ namespace pathways_common.Core
         protected void ConfigurePathwaysServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             this.AddEntityFramework(services);
             this.SetupAzureAdAuth(services);
             services.AddMemoryCache();
