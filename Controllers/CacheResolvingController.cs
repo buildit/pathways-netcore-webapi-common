@@ -8,8 +8,8 @@ namespace pathways_common.Controllers
     public abstract class CacheResolvingController<T> : ApiController
         where T : INamedEntity
     {
-        private readonly IMemoryCache memoryCache;
         private readonly IGetByNameService<T> cachedService;
+        private readonly IMemoryCache memoryCache;
 
         protected CacheResolvingController(IGetByNameService<T> cachedService, IMemoryCache memoryCache)
         {
