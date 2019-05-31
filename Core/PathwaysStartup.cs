@@ -59,11 +59,8 @@ namespace pathways_common.Core
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidAudience = $"{this.Configuration["AzureAd:ClientId"]}",
-                        //ValidIssuer = $"https://sts.windows.net/{azureadoptions.TenantId}/" // for "signInAudience": "AzureADMyOrg" or "AzureADMultipleOrgs"
-                        // ValidIssuer = $"{azureadoptions.Instance}{azureadoptions.TenantId}/v2.0" // for "signInAudience": "AzureADandPersonalMicrosoftAccount"
                         ValidIssuers = new List<string> { $"https://sts.windows.net/{this.Configuration["AzureAd:TenantId"]}/", $"{this.Configuration["AzureAd:Instance"]}{this.Configuration["AzureAd:TenantId"]}/v2.0" }
                     };
-                    // options.TokenValidationParameters //1a6dbb80-5290-4fd1-a938-0ad7795dfd7a/v2.0'
                 });
         }
     }
