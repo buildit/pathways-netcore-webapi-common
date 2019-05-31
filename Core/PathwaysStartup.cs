@@ -8,6 +8,8 @@ namespace pathways_common.Core
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Logging;
+    using Microsoft.IdentityModel.Tokens;
+    using Newtonsoft.Json;
 
     public abstract class PathwaysStartup
     {
@@ -23,7 +25,10 @@ namespace pathways_common.Core
         protected void ConfigurePathwaysServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
             this.AddEntityFramework(services);
             this.SetupAzureAdAuth(services);
             services.AddMemoryCache();
@@ -51,7 +56,7 @@ namespace pathways_common.Core
                 {
                     options.Audience = this.Configuration["AzureAd:ClientId"];
                     options.Authority = $"{this.Configuration["AzureAd:Instance"]}{this.Configuration["AzureAd:TenantId"]}";
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidAudience = $"{this.Configuration["AzureAd:ClientId"]}",
                         //ValidIssuer = $"https://sts.windows.net/{azureadoptions.TenantId}/" // for "signInAudience": "AzureADMyOrg" or "AzureADMultipleOrgs"
