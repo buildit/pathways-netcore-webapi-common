@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Security.Claims;
-    using Authentication;
     using Authentication.TokenAcquisition;
+    using Core;
     using Microsoft.AspNetCore.Authentication.AzureAD.UI;
     using Microsoft.AspNetCore.Authentication.OpenIdConnect;
     using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +37,7 @@
         /// <returns>Unique object ID of the identity, or <c>null</c> if it cannot be found</returns>
         public static string GetObjectId(this ClaimsPrincipal claimsPrincipal)
         {
-            string userObjectId = claimsPrincipal.FindFirstValue(ClaimConstants.ObjectId);
+            string userObjectId = claimsPrincipal.FindFirstValue(PathwaysConstants.Claim.ObjectId);
             if (string.IsNullOrEmpty(userObjectId))
             {
                 userObjectId = claimsPrincipal.FindFirstValue("oid");
@@ -53,7 +53,7 @@
         /// <returns>Tenant ID of the identity, or <c>null</c> if it cannot be found</returns>
         public static string GetTenantId(this ClaimsPrincipal claimsPrincipal)
         {
-            string tenantId = claimsPrincipal.FindFirstValue(ClaimConstants.TenantId);
+            string tenantId = claimsPrincipal.FindFirstValue(PathwaysConstants.Claim.TenantId);
             if (string.IsNullOrEmpty(tenantId))
             {
                 tenantId = claimsPrincipal.FindFirstValue("tid");
@@ -158,8 +158,8 @@
             if (account != null)
             {
                 var identity = new ClaimsIdentity();
-                identity.AddClaim(new Claim(ClaimConstants.ObjectId, account.HomeAccountId.ObjectId));
-                identity.AddClaim(new Claim(ClaimConstants.TenantId, account.HomeAccountId.TenantId));
+                identity.AddClaim(new Claim(PathwaysConstants.Claim.ObjectId, account.HomeAccountId.ObjectId));
+                identity.AddClaim(new Claim(PathwaysConstants.Claim.TenantId, account.HomeAccountId.TenantId));
                 identity.AddClaim(new Claim(ClaimTypes.Upn, account.Username));
                 return new ClaimsPrincipal(identity);
             }
@@ -184,7 +184,7 @@
 
                 // This scope is needed to get a refresh token when users sign-in with their Microsoft personal accounts
                 // (it's required by MSAL.NET and automatically provided when users sign-in with work or school accounts)
-                options.Scope.Add(OidcConstants.ScopeOfflineAccess);
+                options.Scope.Add(PathwaysConstants.Oidc.ScopeOfflineAccess);
                 if (initialScopes != null)
                 {
                     foreach (string scope in initialScopes)

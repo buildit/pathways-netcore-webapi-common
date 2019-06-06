@@ -35,17 +35,13 @@ namespace pathways_common.Core
         protected void ConfigurePathwaysServices(IServiceCollection services)
         {
             services.AddCors();
-
             services.AddOptions();
-
-            this.SetupAdAuthenticationV2(services);
-            services.AddMsal(new[] { GraphConstants.ScopeUserRead });
-            services.AddInMemoryTokenCaches();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            this.SetupAdAuthenticationV2(services);
             this.AddEntityFramework(services);
 
             services.AddMemoryCache();
@@ -75,7 +71,7 @@ namespace pathways_common.Core
             // Added
             services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, options =>
             {
-                var scopes = new[] { GraphConstants.ScopeUserRead };
+                var scopes = new[] { PathwaysConstants.Graph.ScopeUserRead };
                 this.Configuration.Bind("AzureAd", options);
                 // This is an Azure AD v2.0 Web API
                 options.Authority += "/v2.0";
@@ -114,6 +110,9 @@ namespace pathways_common.Core
                     await Task.FromResult(0);
                 };
             });
+            
+            services.AddMsal(new[] { PathwaysConstants.Graph.ScopeUserRead });
+            services.AddInMemoryTokenCaches();
         }
 
         private void SetupAzureAdAuth(IServiceCollection services)

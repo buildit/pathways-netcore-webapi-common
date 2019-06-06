@@ -2,6 +2,7 @@ namespace pathways_common.Authentication
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Core;
     using Extensions;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Http;
@@ -72,7 +73,7 @@ namespace pathways_common.Authentication
 
             // Set the scopes, including the scopes that ADAL.NET / MASL.NET need for the Token cache
             string[] additionalBuildInScopes =
-                { OidcConstants.ScopeOpenId, OidcConstants.ScopeOfflineAccess, OidcConstants.ScopeProfile };
+                { PathwaysConstants.Oidc.ScopeOpenId, PathwaysConstants.Oidc.ScopeOfflineAccess, PathwaysConstants.Oidc.ScopeProfile };
             properties.SetParameter<ICollection<string>>(OpenIdConnectParameterNames.Scope,
                 scopes.Union(additionalBuildInScopes).ToList());
 
@@ -89,7 +90,7 @@ namespace pathways_common.Authentication
             // Additional claims required (for instance MFA)
             if (!string.IsNullOrEmpty(ex.Claims))
             {
-                properties.Items.Add(OidcConstants.AdditionalClaims, ex.Claims);
+                properties.Items.Add(PathwaysConstants.Oidc.AdditionalClaims, ex.Claims);
             }
 
             return properties;

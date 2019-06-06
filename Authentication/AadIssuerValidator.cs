@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Core;
     using Microsoft.IdentityModel.Protocols;
     using Microsoft.IdentityModel.Tokens;
     using Newtonsoft.Json;
@@ -130,11 +131,11 @@
             string tenantId;
 
             // Extract the tenant Id from the claims
-            tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimConstants.tid)?.Value;
+            tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == PathwaysConstants.Claim.tid)?.Value;
 
             if (string.IsNullOrWhiteSpace(tenantId))
             {
-                tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimConstants.TenantId)?.Value;
+                tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == PathwaysConstants.Claim.TenantId)?.Value;
             }
 
             return tenantId;

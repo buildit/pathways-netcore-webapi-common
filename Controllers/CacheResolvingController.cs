@@ -1,19 +1,17 @@
 namespace pathways_common.Controllers
 {
     using System;
-    using Authentication.TokenAcquisition;
     using Interfaces.Entities;
     using Interfaces.Services;
     using Microsoft.Extensions.Caching.Memory;
 
-    public abstract class CacheResolvingController<T> : GraphedApiController
+    public abstract class CacheResolvingController<T> : ApiController
         where T : INamedEntity
     {
         private readonly IGetByNameService<T> cachedService;
         private readonly IMemoryCache memoryCache;
 
-        protected CacheResolvingController(IGetByNameService<T> cachedService, IMemoryCache memoryCache, ITokenAcquisition tokenAcquisition)
-            : base(tokenAcquisition)
+        protected CacheResolvingController(IGetByNameService<T> cachedService, IMemoryCache memoryCache)
         {
             this.memoryCache = memoryCache;
             this.cachedService = cachedService;

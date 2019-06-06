@@ -8,6 +8,7 @@
     using System.Net;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Core;
     using Extensions;
     using Microsoft.AspNetCore.Authentication.AzureAD.UI;
     using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -58,9 +59,9 @@
         /// </summary>
         private readonly string[] scopesRequestedByMsalNet = new string[]
         {
-            OidcConstants.ScopeOpenId,
-            OidcConstants.ScopeProfile,
-            OidcConstants.ScopeOfflineAccess
+            PathwaysConstants.Oidc.ScopeOpenId,
+            PathwaysConstants.Oidc.ScopeProfile,
+            PathwaysConstants.Oidc.ScopeOfflineAccess
         };
 
         /// <summary>
