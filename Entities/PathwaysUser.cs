@@ -8,9 +8,10 @@ namespace pathways_common.Entities
         {
         }
 
-        protected PathwaysUser(string username, string directoryName)
+        protected PathwaysUser(string username, string organizationId, string directoryName)
         {
             this.Username = username;
+            this.OrganizationId = organizationId;
             this.DirectoryName = directoryName;
         }
 
