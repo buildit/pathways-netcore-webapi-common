@@ -6,9 +6,9 @@ namespace pathways_common.Core
     using System.Security.Claims;
     using System.Threading.Tasks;
     using Authentication;
+    using Authentication.Extensions;
     using Authentication.TokenAcquisition;
     using Authentication.TokenCache;
-    using Extensions;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.AzureAD.UI;
     using Microsoft.AspNetCore.Authentication.JwtBearer;

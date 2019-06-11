@@ -1,14 +1,14 @@
-﻿namespace pathways_common.Extensions
+﻿namespace pathways_common.Authentication.Extensions
 {
     using System.Collections.Generic;
     using System.Security.Claims;
-    using Authentication.TokenAcquisition;
     using Core;
     using Microsoft.AspNetCore.Authentication.AzureAD.UI;
     using Microsoft.AspNetCore.Authentication.OpenIdConnect;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Identity.Client;
     using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+    using TokenAcquisition;
 
     public static class ClaimsPrincipalExtension
     {

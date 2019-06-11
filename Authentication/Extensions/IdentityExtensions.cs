@@ -1,4 +1,4 @@
-namespace pathways_common.Extensions
+namespace pathways_common.Authentication.Extensions
 {
     using System.Collections.Generic;
     using System.Linq;

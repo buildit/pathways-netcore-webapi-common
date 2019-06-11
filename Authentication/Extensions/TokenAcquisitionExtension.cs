@@ -2,12 +2,12 @@
 
 [assembly: InternalsVisibleTo("TokenCache.Tests.Core")]
 
-namespace pathways_common.Extensions
+namespace pathways_common.Authentication.Extensions
 {
-    using Authentication.TokenAcquisition;
-    using Authentication.TokenCache;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using TokenAcquisition;
+    using TokenCache;
 
     /// <summary>
     /// Extension methods
