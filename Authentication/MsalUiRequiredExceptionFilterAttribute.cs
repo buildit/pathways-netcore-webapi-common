@@ -29,6 +29,7 @@ namespace pathways_common.Authentication
 
         public override void OnException(ExceptionContext context)
         {
+
             MsalUiRequiredException msalUiRequiredException = context.Exception as MsalUiRequiredException;
             if (msalUiRequiredException == null)
             {

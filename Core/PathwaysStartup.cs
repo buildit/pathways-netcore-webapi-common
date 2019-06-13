@@ -1,5 +1,6 @@
 namespace pathways_common.Core
 {
+    using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
@@ -64,7 +65,11 @@ namespace pathways_common.Core
         private void SetupAdAuthenticationV2(IServiceCollection services)
         {
             services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
-                .AddAzureADBearer(options => this.Configuration.Bind("AzureAd", options));
+                .AddAzureADBearer(options =>
+                {
+                    this.Configuration.Bind("AzureAd", options);
+                    Console.WriteLine($"the AddAzureADBearer options have been configured for ClientId = {options.ClientId}");
+                });
 
             services.AddSession();
             services.AddTokenAcquisition();
@@ -85,9 +90,10 @@ namespace pathways_common.Core
 
                 // When an access token for our own Web API is validated, we add it to MSAL.NET's cache so that it can
                 // be used from the controllers.
-                options.Events = new JwtBearerEvents();
+                // options.Events = new JwtBearerEvents();
 
                 // If you want to debug, or just understand the JwtBearer events, uncomment the following line of code
+                // Events e = new Events();
                 options.Events = JwtBearerMiddlewareDiagnostics.Subscribe(options.Events);
 
                 options.Events.OnTokenValidated = async context =>
@@ -110,7 +116,7 @@ namespace pathways_common.Core
                     await Task.FromResult(0);
                 };
             });
-            
+
             services.AddMsal(new[] { PathwaysConstants.Graph.ScopeUserRead });
             services.AddInMemoryTokenCaches();
         }
